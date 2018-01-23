@@ -1,3 +1,4 @@
 Code Challange
 ## Front Porch
-Run node index.js
+* Run npm install
+* Run node index.js
