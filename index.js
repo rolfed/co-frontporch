@@ -1,4 +1,6 @@
 const app = (() => {
+    const fetch = require('node-fetch');
+    const STUDENT_DATA = "https://gist.githubusercontent.com/petersondrew/4aa8ae630a283a7b942fb693047fc4d7/raw/7c9d643400449e9cbd51faa3afe63c7c28b1dfa7/students.json";
     var data = [
             {
                 "name": "Renee Collingwood",
@@ -221,6 +223,17 @@ const app = (() => {
             }
         ];
 
+    let students;
+
+    fetch(STUDENT_DATA)
+        .then((response) => {
+            students = response.json();
+            console.log('Students ', students);
+            return students;
+        }).catch(err => {
+            console.log('Err: ', err);
+        })
+
     function Student(name, testsTaken, grade) {
        this.name = name;
        this.testTaken = testsTaken;
@@ -259,7 +272,7 @@ const app = (() => {
             return student.grade = Math.round(student.grade / student.testTaken.length);
         })
 
-        student.map((student, index) => {
+        student.map((student) => {
             delete student.testTaken;
 
             if (student.grade < 70) {
